@@ -31,6 +31,6 @@ $ yarn or npm install
 $ yarn android (or yarn ios)
 ```
 
-## 📝 Licença
+## 📝 License
 
 Made with ♥ by [Lucas Alves](https://lucalves.github.io/)
