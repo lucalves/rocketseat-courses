@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   View, 
   Text, 
+  Alert,
   StyleSheet, 
   TextInput, 
   Platform,
@@ -12,16 +13,33 @@ import {
 import { Button } from '../components/Button';
 import { SkillCard } from '../components/SkillCard';
 
+interface SkillData {
+  id: string;
+  name: string;
+}
+
 export function Home() {
   const [newSkill, setNewSkill] = useState('');
-  const [mySkills, setMySkills] = useState([]);
+  const [mySkills, setMySkills] = useState<SkillData[]>([]);
   const [greeting, setGreeting] = useState('');
 
   function handleAddNewSkill() {
-    // Utilização do spread operator (...) para receber
-    // os itens anteriores do Array e adicionar os novos
-    
-    setMySkills(oldState => [...oldState, newSkill]);
+    const data = {
+      id: String(new Date().getTime()),
+      name: newSkill,
+    }
+
+    if (newSkill !== '') {
+      setMySkills(oldState => [...oldState, data]);
+    } else {
+      Alert.alert('Por favor, adicione uma skill.');
+    }
+  }
+
+  function handleRemoveSkill(id: string) {
+    setMySkills(oldState => oldState.filter(
+      skill => skill.id !== id
+    ))
   }
 
   useEffect(() => {
@@ -60,12 +78,13 @@ export function Home() {
       </Text>
 
       <FlatList 
-        key={newSkill}
         data={mySkills}
         showsVerticalScrollIndicator={false}
-        keyExtractor={item => item}
+        keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <SkillCard skill={item} />
+          <SkillCard
+            onPress={() => handleRemoveSkill(item.id)}
+            skill={item.name} />
         )}
       />
       
