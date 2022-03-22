@@ -46,11 +46,11 @@ export function Home() {
     const currentHour = new Date().getHours();
     
     if(currentHour < 12) {
-      setGreeting('Good morning! 🙂');
+      setGreeting('Good morning! ☕');
     } else if (currentHour < 18) {
-      setGreeting('Good afternoon! 🙂');
+      setGreeting('Good afternoon! 🍂');
     } else {
-      setGreeting('Good evening! 🙂');
+      setGreeting('Good evening! 🌙');
     }
 
   }, [])
