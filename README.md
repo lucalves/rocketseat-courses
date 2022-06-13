@@ -1,3 +1,3 @@
 # rocketseat
 
-Storing projects made in rocketseat.
+Rocketseat course code.
